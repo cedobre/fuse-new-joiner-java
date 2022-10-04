@@ -1,13 +1,41 @@
 {
-  "id" : "16369e06-78d4-40a7-98d1-3dbe0ba82fc9",
+  "id" : "76ada7b0-49ae-4229-91c4-396a36f18e09",
   "name" : "tops_last",
   "request" : {
-    "url" : "/tops/last?symbols=FB&token=pk_9153e89729c54bfe95e779fd1c1445f8",
+    "url" : "/stock/aa/chart/1y?token=pk_9153e89729c54bfe95e779fd1c1445f8",
     "method" : "GET"
   },
   "response" : {
     "status" : 200,
-    "jsonBody" : [{"symbol":"FB","price":186.3011,"size":100,"time":1565273330617}],
+    "jsonBody" : [
+      {
+        "close":44.83,
+        "high":45.79,
+        "low":44.4,
+        "open":45.63,
+        "symbol":"AA",
+        "volume":5312466,
+        "date":"2022-07-08"
+      },
+      {
+        "close":42.73,
+        "high":44.38,
+        "low":42.59,
+        "open":43.82,
+        "symbol":"AA",
+        "volume":4849341,
+        "date":"2022-07-11"
+      },
+      {
+        "close":42.25,
+        "high":42.95,
+        "low":41.1612,
+        "open":41.65,
+        "symbol":"AA",
+        "volume":4310102,
+        "date":"2022-07-12"
+      }
+    ],
     "headers" : {
       "Server" : "nginx",
       "Date" : "Thu, 08 Aug 2019 14:08:53 GMT",
@@ -26,7 +54,7 @@
       "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
     }
   },
-  "uuid" : "16369e06-78d4-40a7-98d1-3dbe0ba82fc9",
+  "uuid" : "76ada7b0-49ae-4229-91c4-396a36f18e09",
   "persistent" : true,
   "insertionIndex" : 5
 }

@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.galatea</groupId>
@@ -35,7 +35,7 @@
 		<sonar.organization>galatea-associates</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<!-- Allow us to skip Unit Tests only, if need be, with -Dskip.surefire.tests, but retain the skip all tests functionality of -DskipTests -->
-		<skip.surefire.tests>${skipTests}</skip.surefire.tests>
+<!--		<skip.surefire.tests>${skipTests}</skip.surefire.tests>-->
 	</properties>
 
 	<parent>
@@ -135,7 +135,7 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
@@ -224,7 +224,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-    <!-- H2 database for persistence -->
+		<!-- H2 database for persistence -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -292,16 +292,16 @@
 			<version>5.1.2.RELEASE</version>
 		</dependency>
 
-    <dependency>
-      <groupId>io.github.openfeign</groupId>
-      <artifactId>feign-core</artifactId>
-      <version>9.5.1</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.openfeign</groupId>
-      <artifactId>feign-jackson</artifactId>
-      <version>9.5.1</version>
-    </dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>9.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-jackson</artifactId>
+			<version>9.5.1</version>
+		</dependency>
 
 		<!-- Testing dependencies -->
 		<dependency>
@@ -362,6 +362,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -387,17 +388,19 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+
 				<configuration>
 					<excludedGroups>org.galatea.starter.IntegrationTestCategory</excludedGroups>
-					<!-- skips surefire tests without skipping failsafe tests. Property 
+					<!-- skips surefire tests without skipping failsafe tests. Property
 						value seems to magically default to false -->
 					<!-- See https://stackoverflow.com/questions/6612344/prevent-unit-tests-in-maven-but-allow-integration-tests -->
-					<skipTests>${skip.surefire.tests}</skipTests>
+<!--					<skipTests>${skip.surefire.tests}</skipTests>-->
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.1</version>
 				<configuration>
 					<includes>
 						<include>**/*.java</include>
@@ -426,14 +429,14 @@
 						io.grpc:protoc-gen-grpc-java:1.4.0:exe:${os.detected.classifier}
 					</pluginArtifact>
 				</configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>compile-custom</goal>
-            </goals>
-          </execution>
-        </executions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>compile-custom</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

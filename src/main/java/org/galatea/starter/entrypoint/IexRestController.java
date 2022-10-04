@@ -6,12 +6,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.aspect4log.Log;
 import net.sf.aspect4log.Log.Level;
+import org.galatea.starter.domain.IexHistoricalPrices;
 import org.galatea.starter.domain.IexLastTradedPrice;
 import org.galatea.starter.domain.IexSymbol;
 import org.galatea.starter.service.IexService;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +33,10 @@ public class IexRestController {
    * @return a list of all IexStockSymbols.
    */
   @GetMapping(value = "${mvc.iex.getAllSymbolsPath}", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<IexSymbol> getAllStockSymbols(@RequestParam(value = "token", required = false, defaultValue = "${spring.datasource.token}")
-                                            String token) {
+  public List<IexSymbol> getAllStockSymbols(@RequestParam(value = "token",
+                                            required = false,
+                                            defaultValue = "${spring.datasource.token}")
+                                            final String token) {
     return iexService.getAllSymbols(token);
   }
   /**
@@ -42,11 +46,32 @@ public class IexRestController {
    * @return a List of IexLastTradedPrice objects for the given symbols.
    */
   @GetMapping(value = "${mvc.iex.getLastTradedPricePath}", produces = {
-      MediaType.APPLICATION_JSON_VALUE})
+          MediaType.APPLICATION_JSON_VALUE})
   public List<IexLastTradedPrice> getLastTradedPrice(
-      @RequestParam(value = "symbols") final List<String> symbols, @RequestParam(value = "token", required = false, defaultValue = "${spring.datasource.token}")
-  String token) {
+          @RequestParam(value = "symbols") final List<String> symbols,
+          @RequestParam(value = "token", required = false,
+              defaultValue = "${spring.datasource.token}")
+              final String token) {
     return iexService.getLastTradedPriceForSymbols(symbols, token);
   }
+
+  /**
+   * Get historical prices for each symbol and given range
+   *
+   * @param symbol  symbols to get historical traded price for.
+   * @param range to specify the required range
+   * @return a List of IexLastTradedPrice objects for the given symbols.
+   */
+  @GetMapping(value = "${mvc.iex.getHistoricalPricesPath}/{symbol}/{range}", produces = {
+          MediaType.APPLICATION_JSON_VALUE})
+  public List<IexHistoricalPrices> getHistoricalPrices(
+          @PathVariable final String symbol,
+          @PathVariable final String range,
+          @RequestParam(value = "token", required = false,
+          defaultValue = "${spring.datasource.token}")
+  String token) {
+    return iexService.getHistoricalPrices(symbol,range, token);
+  }
+
 
 }
